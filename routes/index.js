@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
+const admin = require('./modules/admin')
 const attractionController = require('../controllers/attractionController')
+
+router.use('/admin', admin)
 
 router.get('/attractions', attractionController.getAttractions)
 
