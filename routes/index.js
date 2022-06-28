@@ -4,7 +4,7 @@ const passport = require('../config/passport')
 const admin = require('./modules/admin')
 const attractionController = require('../controllers/attractionController')
 const userController = require('../controllers/userController')
-const { authenticated, authenticatedAdmin  } = require('../middleware/auth')
+const { authenticated, authenticatedAdmin } = require('../middleware/auth')
 const { generalErrorHandler } = require('../middleware/error-handler')
 
 router.use('/admin', authenticatedAdmin, admin)
