@@ -36,6 +36,17 @@ const adminController = {
     } catch (err) {
       next(err)
     }
+  },
+  getAttraction: async (req, res, next) => {
+    try {
+      const attraction = await Attraction.findByPk(req.params.id, {
+        raw: true
+      })
+      if (!attraction) throw new Error('attraction not found')
+      res.render('admin/attraction', { attraction })
+    } catch (err) {
+      next(err)
+    }
   }
 }
 module.exports = adminController

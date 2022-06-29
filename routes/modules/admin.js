@@ -4,6 +4,7 @@ const adminController = require('../../controllers/adminController')
 
 router.get('/attractions', adminController.getAttractions)
 router.get('/attractions/create', adminController.createAttraction)
+router.get('/attractions/:id', adminController.getAttraction)
 router.post('/attractions', adminController.postAttraction)
 
 // fallback 路由
