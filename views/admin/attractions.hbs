@@ -1,1 +1,37 @@
-<div>  admin attractions</div>
+<h1>Attractions Management</h1>
+<a href='/admin/attractions/create'>
+  <button type="button" class="btn btn-primary">New Attraction</button>
+</a>
+<br />
+<table class="table align-middle">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each attractions}}
+      <tr>
+        <th scope="row">{{this.id}}</th>
+        <td>{{this.name}}</td>
+        <td>
+          <button type="button" class="btn btn-link">
+            <a class="btn btn-link link-primary" href="/admin/attractions/{{this.id}}">
+              Information
+            </a>
+          </button>
+          <button type="button" class="btn btn-link">
+            <a class="btn btn-link link-primary" href="/admin/attractions/{{this.id}}/edit">
+              Edit
+            </a>
+          </button>
+          <form action="/admin/attractions/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+            <button type="submit" class="btn btn-link link-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
