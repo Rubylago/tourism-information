@@ -77,6 +77,20 @@ const adminController = {
     } catch (err) {
       next(err)
     }
+  },
+  deleteAttraction: async (req, res, next) => {
+    try {
+      const attraction = Attraction.findByPk(req.params.id)
+      if (!attraction) throw new Error('attraction not found')
+      await Attraction.destroy({
+        where: {
+          id: req.params.id
+        }
+      })
+      return res.redirect('/admin/attractions')
+    } catch (err) {
+      next(err)
+    }
   }
 }
 module.exports = adminController
