@@ -1,9 +1,10 @@
-const { Attraction } = require('../models')
+const { Attraction, City } = require('../models')
 
 const adminController = {
   getAttractions: async (req, res, next) => {
     try {
       const attractions = await Attraction.findAll({
+        order: [['id', 'DESC']],
         raw: true
       })
       return res.render('admin/attractions', { attractions })
@@ -13,7 +14,11 @@ const adminController = {
   },
   createAttraction: async (req, res, next) => {
     try {
-      res.render('admin/create-attraction')
+      const cities = await City.findAll({
+        attributes: ['name'],
+        raw: true
+      })
+      res.render('admin/create-attraction', { cities })
     } catch (err) {
       next(err)
     }
@@ -53,8 +58,12 @@ const adminController = {
       const attraction = await Attraction.findByPk(req.params.id, {
         raw: true
       })
+      const cities = await City.findAll({
+        attributes: ['name'],
+        raw: true
+      })
       if (!attraction) throw new Error('attraction not found')
-      res.render('admin/edit-attraction', { attraction })
+      res.render('admin/edit-attraction', { attraction, cities })
     } catch (err) {
       next(err)
     }
