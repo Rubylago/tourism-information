@@ -11,6 +11,17 @@ const attractionController = {
       introduction: data.introduction.substring(0, 50)
     }))
     return res.render('attractions', { attractions: data })
+  },
+  getAttraction: async (req, res, next) => {
+    try {
+      const attraction = await Attraction.findByPk(req.params.id, {
+        raw: true
+      })
+      if (!attraction) throw new Error('attraction not found')
+      res.render('attraction', { attraction })
+    } catch (err) {
+      next(err)
+    }
   }
 }
 module.exports = attractionController

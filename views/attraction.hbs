@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>{{attraction.name}}</h1>
+  </div>
+  <div class="col-md-4">
+    <img class="img-responsive center-block" src="{{attraction.photo}}" style="width: 250px; margin-bottom: 25px">
+    <br>
+    <div class="well">
+      <ul class="list-unstyled">
+        <li><strong>Tel:</strong> {{attraction.tel}}</li>
+        <li><strong>City:</strong> {{attraction.city}}</li>
+        <li><strong>Town:</strong> {{attraction.town}}</li>
+        <li><strong>Address:</strong> {{attraction.address}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <p style="white-space: break-spaces;">{{attraction.introduction}}</p>
+  </div>
+  <hr>
+</div>
+<a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a>
