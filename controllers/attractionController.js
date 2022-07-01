@@ -14,11 +14,11 @@ const attractionController = {
   },
   getAttraction: async (req, res, next) => {
     try {
-      const attraction = await Attraction.findByPk(req.params.id, {
-        raw: true
-      })
+      const attraction = await Attraction.findByPk(req.params.id)
       if (!attraction) throw new Error('attraction not found')
-      res.render('attraction', { attraction })
+      await attraction.increment('views')
+      await attraction.reload()
+      res.render('attraction', { attraction: attraction.toJSON() })
     } catch (err) {
       next(err)
     }
