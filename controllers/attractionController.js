@@ -1,16 +1,27 @@
 const { Attraction } = require('../models')
+const { getOffset, getPagination } = require('../helpers/pagination-helper')
 
 const attractionController = {
   getAttractions: async (req, res) => {
-    const attractions = await Attraction.findAll({
+    const DEFAULT_LIMIT = 9
+    const page = Number(req.query.page) || 1
+    const limit = DEFAULT_LIMIT
+    const offset = getOffset(limit, page)
+
+    const attractions = await Attraction.findAndCountAll({
       order: [['id', 'DESC']],
+      limit,
+      offset,
       raw: true
     })
-    const data = attractions.map(data => ({
+    const data = attractions.rows.map(data => ({
       ...data,
       introduction: data.introduction.substring(0, 50)
     }))
-    return res.render('attractions', { attractions: data })
+    return res.render('attractions', {
+      attractions: data,
+      pagination: getPagination(limit, page, attractions.count)
+    })
   },
   getAttraction: async (req, res, next) => {
     try {
