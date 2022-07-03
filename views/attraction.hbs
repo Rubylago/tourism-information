@@ -44,12 +44,19 @@
     <div class="col-md-1">
       <img src="{{this.User.avatar}}" class="img-fluid rounded-start" width="100" height="100">
     </div>
-    <div class="col-md-11">
+    <div class="col-md-10">
       <div class="card-body">
         <h5 class="card-title"><a href="/users/{{this.User.id}}">{{this.User.name}}</a></h5>
         <p class="card-text">{{this.text}}</p>
         <p class="card-text"><small class="text-muted">{{relativeTimeFromNow this.createdAt}}</small></p>
       </div>
+    </div>
+    <div class="col-md-1">
+      {{#if ../user.isAdmin}}
+        <form action="/comments/{{this.id}}?_method=DELETE" method="POST" style="margin: 50% 0">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      {{/if}}
     </div>
   </div>
 </div>

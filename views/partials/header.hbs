@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light px-4">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4" style="background-color: #bbddce;">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
         <i class="fa-solid fa-location-dot"> Tourism Review </i>
@@ -29,10 +29,13 @@
               </li>
             {{/if}}
             <li class="nav-item d-inline-flex align-items-center">
-              <span class="text-white nav-link">Hi, {{ user.email }}</span>
+              <a href="/users/{{user.id}}">
+              <img src="{{user.avatar}}" alt="" width="20" height="20" class="d-inline-block align-text-top">
+              <span class="navbar-text">{{user.email}}</span>
+              </a>
             </li>
             <li class="nav-item">
-              <a href="/logout"><button class="btn btn-outline-success my-sm-0 my-2">Logout</button></a>
+              <a href="/logout"><button class="btn btn-outline-success my-sm-0 my-2" style="margin:10px;">Logout</button></a>
             </li>
           </ul>
         </div>

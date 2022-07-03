@@ -1,0 +1,70 @@
+<div class="row mb-5">
+  <div class="col-md-4">
+    <img class="img-responsive center-block mb-5" src="{{user.avatar}}" style="width: 250px;">
+  </div>
+  <div class="col-md-8">
+    <div class="well">
+      <ul class="list-unstyled">
+        <li><strong>name:</strong> {{user.name}}</li>
+        <li><strong>email:</strong> {{user.email}}</li>
+        <li><strong>Comments:</strong> 留言總數  </li>
+        <li><strong>Liked Attractions:</strong> {{ user.LikedAttractions.length }} </li>
+        <li><strong>Followings:</strong> {{ user.Followings.length }} </li>
+        <li><strong>Followers:</strong> {{ user.Followers.length }}  </li>
+      </ul>
+      {{#ifCond user.id id }}
+        <a class="btn btn-primary" href="/users/{{user.id}}/edit">edit</a>
+      {{/ifCond}}
+      <a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a>
+    </div>
+  </div>
+  <hr>
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Liked Attractions</h5>
+        {{#each user.LikedAttractions }}
+          <a href="/restaurants/{{this.id}}"><p class="card-text">{{this.name}}</p></a>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+    {{!-- Comment --}}
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{attractionCount}}Comments</h5>
+        <p class="card-text">
+          {{#each attractionListSet}}
+            <blockquote class="blockquote mb-0">
+              <span><a href="/restaurants/{{this.id}}">{{this.name}}</a></span>
+            </blockquote>
+          {{/each}}
+        </p>
+      </div>
+    </div>
+  </div>
+    <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Followers</h5>
+        {{#each user.Followers}}
+          <a href="/users/{{ this.id }}"><p class="card-text">{{this.name}}</p></a>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Followings</h5>
+        {{#each user.Followings}}
+        <a href="/users/{{this.id}}"><p class="card-text">{{this.name}}</p></a>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>

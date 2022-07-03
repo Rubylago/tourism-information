@@ -61,6 +61,15 @@ const userController = {
     req.flash('success_messages', '登出成功！')
     req.logout()
     res.redirect('/signin')
+  },
+  getUser: async (req, res, next) => {
+    try {
+      const user = await User.findByPk(req.params.userId)
+      if (!user) throw new Error('user not found')
+      res.render('users/profile', { user: user.toJSON() })
+    } catch (err) {
+      next(err)
+    }
   }
 }
 module.exports = userController

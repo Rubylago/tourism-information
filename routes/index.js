@@ -21,6 +21,9 @@ router.get('/attractions/:id', authenticated, attractionController.getAttraction
 router.get('/attractions', authenticated, attractionController.getAttractions)
 
 router.post('/comments/:id', authenticated, commentController.postComment)
+router.delete('/comments/:id', authenticated, commentController.deleteComment)
+
+router.get('/users/:userId', authenticated, userController.getUser)
 
 // fallback 路由
 router.get('/', (req, res) => res.redirect('/attractions'))
