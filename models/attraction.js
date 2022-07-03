@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate (models) {
       // define association here
+      Attraction.hasMany(models.Comment, { foreignKey: 'attractionId' })
     }
   }
   Attraction.init({
