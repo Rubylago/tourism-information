@@ -24,4 +24,15 @@
     <span><i class="fa-regular fa-eye"></i> {{attraction.views}} 瀏覽次數 </span>
   </div>
 </div>
-<a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a>
+
+{{!-- Comment --}}
+<form action="/comments/{{attraction.id}}" method="POST">
+  <div class="form-row mb-3">
+    <label class="form-label" for="text">Comment as 
+      <a href="">{{user.name}}</a>
+    </label>
+    <textarea class="form-control" id="text" name="text" rows="3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a>
+</form>
