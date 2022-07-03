@@ -1,15 +1,15 @@
-const { User, Comment, Attraction } = require('../models')
+const { Comment, Attraction } = require('../models')
 
 const commentController = {
   postComment: async (req, res, next) => {
     try {
       const { text } = req.body
       const attractionId = req.params.id
-      // comment.create
       const attraction = await Attraction.findByPk(attractionId)
       if (!attraction) throw new Error('attraction not found')
       if (text.trim().length === 0) throw new Error('text is required')
       if (/[~!@#$%^&*()_+<>?:"{},.\\/;'[\]]/im.test(text)) throw new Error('don\'t use special characters')
+      if (text.length > 150) throw new Error('max length 150')
       await Comment.create({
         text,
         attractionId,
@@ -20,7 +20,6 @@ const commentController = {
       next(err)
     }
   }
-
 }
 
 module.exports = commentController

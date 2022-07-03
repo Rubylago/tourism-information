@@ -1,4 +1,4 @@
-const { Attraction } = require('../models')
+const { Attraction, Comment, User } = require('../models')
 const { getOffset, getPagination } = require('../helpers/pagination-helper')
 
 const attractionController = {
@@ -25,11 +25,21 @@ const attractionController = {
   },
   getAttraction: async (req, res, next) => {
     try {
-      const attraction = await Attraction.findByPk(req.params.id)
+      const attraction = await Attraction.findOne(
+        {
+          where: { id: req.params.id },
+          include: [
+            {
+              model: Comment,
+              include: [
+                { model: User, attributes: ['id', 'name', 'avatar'] }]
+            }
+          ],
+          order: [[Comment, 'createdAt', 'DESC']]
+        })
       if (!attraction) throw new Error('attraction not found')
       await attraction.increment('views')
-      await attraction.reload()
-      res.render('attraction', { attraction: attraction.toJSON() })
+      res.render('attraction', { attraction: attraction.toJSON(), comments: attraction.toJSON().Comments })
     } catch (err) {
       next(err)
     }
