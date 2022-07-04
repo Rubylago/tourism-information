@@ -1,7 +1,18 @@
 <div class="row">
-  <div class="col-md-12">
-    <h1>{{attraction.name}}</h1>
-  </div>
+    <div class="col-md-12">
+      <div class="d-flex">
+        <h1>{{attraction.name}}</h1>
+        {{#if isLiked}}
+        <form action="/like/{{attraction.id}}?_method=DELETE" method="POST">
+          <button type="submit" class="btn btn-danger m-1" ><i class="fa-solid fa-heart"></i></button>
+        </form>
+        {{else}}
+        <form action="/like/{{attraction.id}}" method="POST">
+          <button type="submit" class="btn btn-light m-1"><i class="fa-regular fa-heart"></i></button>
+        </form>
+        {{/if}}
+      </div>
+    </div>
   <div class="col-md-4">
     <img class="img-responsive center-block" src="{{attraction.photo}}" style="width: 250px; margin-bottom: 25px">
     <br>
@@ -17,10 +28,11 @@
   <div class="col-md-8">
     <p style="white-space: break-spaces;">{{attraction.introduction}}</p>
   </div>
+
   <hr>
   <div style="display: flex;justify-content: flex-end;">
     <span><i class="fa-regular fa-comment-dots" style="margin: 0 5px"></i> {{comments.length}} Comments </span> 
-    <span><i class="fa-regular fa-heart" style="margin: 0 5px"></i> Likes </span>
+    <span><i class="fa-regular fa-heart" style="margin: 0 5px"></i>{{likes}}Likes </span>
     <span><i class="fa-regular fa-eye" style="margin: 0 5px"></i> {{attraction.views}} Views </span>
   </div>
 </div>

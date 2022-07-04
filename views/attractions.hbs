@@ -13,12 +13,24 @@
           </p>
           <span class="badge bg-secondary">{{this.city}}</span>
           <p class="card-text text-truncate">{{this.introduction}}</p>
+          <div class="d-flex">
+            {{#if this.isLiked}}
+            <form action="/like/{{this.id}}?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-danger m-1" ><i class="fa-solid fa-heart"></i></button>
+            </form>
+            {{else}}
+            <form action="/like/{{this.id}}" method="POST">
+              <button type="submit" class="btn btn-light m-1"><i class="fa-regular fa-heart"></i></button>
+            </form>
+            {{/if}}
+          </div>
         </div>
       </div>
     </div>
   {{/each}}
 </div> 
 
+{{!-- pagination --}}
 <nav aria-label="Page navigation">
   <ul class="pagination justify-content-center">
     <li class="page-item {{#ifCond pagination.currentPage 1}}disabled{{/ifCond}}">

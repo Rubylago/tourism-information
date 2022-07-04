@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs')
-const { User } = require('../models')
-const { getUser } = require('../helpers/auth-helpers')
+const { User, Attraction, Like } = require('../models')
 const userController = {
   signUpPage: (req, res) => {
     res.render('signup')
@@ -56,7 +55,7 @@ const userController = {
   },
   signIn: (req, res) => {
     req.flash('success_messages', '成功登入！')
-    res.redirect('/attractions')
+    res.redirect('/attractions/news')
   },
   logout: (req, res) => {
     req.flash('success_messages', '登出成功！')
@@ -74,8 +73,8 @@ const userController = {
   },
   editUser: (req, res, next) => {
     try {
-      const logInUser = getUser(req)
-      if (logInUser.id !== Number(req.params.userId)) throw new Error('can\'t do that shit')
+      const logInUserId = req.user.id
+      if (logInUserId !== Number(req.params.userId)) throw new Error('can\'t do that shit')
       res.render('users/edit')
     } catch (err) {
       next(err)
@@ -83,11 +82,11 @@ const userController = {
   },
   putUser: async (req, res, next) => {
     try {
-      const logInUser = getUser(req)
+      const logInUserId = req.user.id
       const errors = []
       const { name, introduction } = req.body
       let { avatar } = req.body
-      if (logInUser.id !== Number(req.params.userId)) throw new Error('can\'t do that shit')
+      if (logInUserId !== Number(req.params.userId)) throw new Error('can\'t do that shit')
       const user = await User.findByPk(req.params.userId)
       if (!user) {
         errors.push({ message: 'user not found' })
@@ -114,7 +113,47 @@ const userController = {
         avatar,
         introduction
       })
-      res.redirect(`/users/${logInUser.id}`)
+      res.redirect(`/users/${logInUserId}`)
+    } catch (err) {
+      next(err)
+    }
+  },
+  addLike: async (req, res, next) => {
+    try {
+      const attraction = await Attraction.findByPk(req.params.id)
+      if (!attraction) throw new Error('attraction not found')
+      const like = await Like.findOne({
+        where: {
+          userId: req.user.id,
+          attractionId: req.params.id
+        }
+      })
+      if (like) throw new Error('already liked')
+      await Like.create({
+        userId: req.user.id,
+        attractionId: req.params.id
+      })
+      req.flash('success_messages', 'liked successfully')
+      res.redirect('back')
+    } catch (err) {
+      next(err)
+    }
+  },
+  deleteLike: async (req, res, next) => {
+    try {
+      // if !like if !attraction
+      const attraction = await Attraction.findByPk(req.params.id)
+      if (!attraction) throw new Error('attraction not found')
+      const like = await Like.findOne({
+        where: {
+          userId: req.user.id,
+          attractionId: req.params.id
+        }
+      })
+      if (!like) throw new Error('did\'t liked before')
+      await like.destroy()
+      req.flash('success_messages', 'unlike successfully')
+      res.redirect('back')
     } catch (err) {
       next(err)
     }

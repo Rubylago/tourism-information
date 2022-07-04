@@ -1,4 +1,4 @@
-const { Attraction, Comment, User } = require('../models')
+const { Attraction, Comment, User, Like } = require('../models')
 const { getOffset, getPagination } = require('../helpers/pagination-helper')
 
 const attractionController = {
@@ -7,7 +7,7 @@ const attractionController = {
     const page = Number(req.query.page) || 1
     const limit = DEFAULT_LIMIT
     const offset = getOffset(limit, page)
-
+    const LikedAttractionsId = req.user && req.user.LikedAttraction.map(liked => liked.id)
     const attractions = await Attraction.findAndCountAll({
       order: [['id', 'DESC']],
       limit,
@@ -16,7 +16,8 @@ const attractionController = {
     })
     const data = attractions.rows.map(data => ({
       ...data,
-      introduction: data.introduction.substring(0, 50)
+      introduction: data.introduction.substring(0, 50),
+      isLiked: LikedAttractionsId.includes(data.id)
     }))
     return res.render('attractions', {
       attractions: data,
@@ -25,9 +26,9 @@ const attractionController = {
   },
   getAttraction: async (req, res, next) => {
     try {
-      const attraction = await Attraction.findOne(
+      const LikedAttractionsId = req.user && req.user.LikedAttraction.map(liked => liked.id)
+      const attraction = await Attraction.findByPk(req.params.id,
         {
-          where: { id: req.params.id },
           include: [
             {
               model: Comment,
@@ -38,8 +39,18 @@ const attractionController = {
           order: [[Comment, 'createdAt', 'DESC']]
         })
       if (!attraction) throw new Error('attraction not found')
+      const likes = await Like.findAndCountAll({
+        where: {
+          attractionId: req.params.id
+        }
+      })
       await attraction.increment('views')
-      res.render('attraction', { attraction: attraction.toJSON(), comments: attraction.toJSON().Comments })
+      res.render('attraction', {
+        attraction: attraction.toJSON(),
+        comments: attraction.toJSON().Comments,
+        isLiked: LikedAttractionsId.includes(Number(req.params.id)),
+        likes: likes.count
+      })
     } catch (err) {
       next(err)
     }
@@ -48,7 +59,7 @@ const attractionController = {
     try {
       // order newest 10 attractions & comments
       const attractions = await Attraction.findAll({
-        limit: 6,
+        limit: 4,
         order: [
           ['createdAt', 'DESC']
         ],
@@ -65,7 +76,6 @@ const attractionController = {
         raw: true,
         nest: true
       })
-      // console.log('comments', comments)
       res.render('news', { attractions, comments })
     } catch (err) {
       next(err)
