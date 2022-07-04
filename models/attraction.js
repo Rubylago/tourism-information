@@ -12,6 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate (models) {
       // define association here
       Attraction.hasMany(models.Comment, { foreignKey: 'attractionId' })
+      Attraction.belongsToMany(models.User, {
+        through: models.Like, // 透過 Like 表來建立關聯
+        foreignKey: 'attractionId', // 對 Like 表設定 FK
+        as: 'LikedUsers'
+      })
     }
   }
   Attraction.init({

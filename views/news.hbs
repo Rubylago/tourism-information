@@ -1,0 +1,73 @@
+<div class="card bg-light text-white text-center">
+  <img src="https://loremflickr.com/cache/resized/65535_52063947717_902dde2f8b_b_1000_300_nofilter.jpg" class="card-img" alt="...">
+  <div class="card-img-overlay">
+    <div style="margin: 10% 0 10px;">
+      <h1 class="card-title">Find Your Next Vacation</h1>
+      <p class="card-text">Design your perfect vacation by choosing from the best attractions.</p>
+    </div>
+    <form action="">
+      <div class="mb-3">
+        <input type="text" class="form-control-lg" placeholder="Pick a destination">
+        <button class="btn btn-info" type="button" id="button-addon2">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+<hr>
+
+<h2><i class="fa-regular fa-star"></i>New Attractions</h2>
+{{!-- <div class="row row-cols-1 row-cols-md-3 g-4">
+    {{#each attractions}}
+  <div class="col-lg-4 mb-3 d-flex align-items-stretch">
+      <div class="card m-3 h-80" style="width: 18rem;">
+        <img src="{{this.photo}}" class="card-img-top"  >
+          <div class="card-body">
+            <h4 class="card-title">
+              <a class="link-primary" href="/attractions/{{this.id}}">{{this.name}}</a>
+              <small class="fs-6">[{{this.city}}]</small>
+            </h4>
+            {{relativeTimeFromNow this.createdAt}}
+            <hr>
+          </div>
+      </div>
+  </div>
+    {{/each}}
+</div> 
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        New Comments
+      </div>
+      <div class="card-body">
+        {{#each comments}}
+          <div>
+            <h4>
+              <a class="link-primary" href="/attractions/{{this.Attraction.id}}">{{this.Attraction.name}}</a>
+            </h4>
+            <p class="my-4" style="white-space: break-spaces;">{{this.text}}</p>
+            - <a class="link-secondary" href="/users/{{this.User.id}}">{{this.User.name}}</a>
+            <small>at {{relativeTimeFromNow this.createdAt}}</small>
+            <hr>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div> --}}
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+{{#each attractions}}
+    <div class="col">
+      <a class="link-primary" style="color:rgb(0, 0, 0); " href="/attractions/{{this.id}}">
+        <div class="card h-100 text-center">
+          <img src="{{this.photo}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title" style="font-size: 26pt;">
+              {{this.name}}
+            </h5>
+            <p class="card-text text-black">{{this.city}}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+{{/each}}

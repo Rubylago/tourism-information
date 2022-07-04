@@ -43,6 +43,33 @@ const attractionController = {
     } catch (err) {
       next(err)
     }
+  },
+  getNews: async (req, res, next) => {
+    try {
+      // order newest 10 attractions & comments
+      const attractions = await Attraction.findAll({
+        limit: 6,
+        order: [
+          ['createdAt', 'DESC']
+        ],
+        raw: true
+      })
+      const comments = await Comment.findAll({
+        limit: 5,
+        include: [
+          { model: User, attributes: ['id', 'name', 'avatar', 'createdAt'] },
+          { model: Attraction, attributes: ['id', 'name', 'introduction', 'photo', 'city', 'createdAt'] }],
+        order: [
+          ['createdAt', 'DESC']
+        ],
+        raw: true,
+        nest: true
+      })
+      // console.log('comments', comments)
+      res.render('news', { attractions, comments })
+    } catch (err) {
+      next(err)
+    }
   }
 }
 module.exports = attractionController
