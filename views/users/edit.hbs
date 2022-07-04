@@ -1,0 +1,39 @@
+<div class="mb-4 text-center">
+  <h1 class="h3 font-weight-normal mb-3">Edit</h1>
+</div>
+<form action="/users/{{user.id}}?_method=PUT" method="POST" style="width: 100%;">
+  <div class="form-row mb-3">
+    <label class="form-label" for="name">Name</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      class="form-control"
+      placeholder="Name"
+      value="{{user.name}}"
+      required
+      autofocus
+    />
+  </div>
+    <div class="form-row mb-3">
+    <label class="form-label" for="avatar">avatar</label>
+    <input 
+    class="form-control" 
+    type="url" 
+    name="avatar" 
+    id="avatar" 
+    placeholder="Enter avatar URL" 
+    value="{{user.avatar}}">
+  </div>
+  <div class="form-row mb-3">
+    <label class="form-label" for="introduction">introduction</label>
+    <textarea 
+      class="form-control" 
+      id="introduction" 
+      name="introduction" 
+      rows="3" 
+      value="{{user.introduction}}"
+    ></textarea>
+  </div>
+  <button class="btn btn-primary btn-block" type="submit">Submit</button>
+</form>

@@ -11,8 +11,9 @@
         <li><strong>Liked Attractions:</strong> {{ user.LikedAttractions.length }} </li>
         <li><strong>Followings:</strong> {{ user.Followings.length }} </li>
         <li><strong>Followers:</strong> {{ user.Followers.length }}  </li>
+        <li><strong>introduction:</strong> {{user.introduction}}</li>
       </ul>
-      {{#ifCond user.id id }}
+      {{#ifCond user.id logInUser.id }}
         <a class="btn btn-primary" href="/users/{{user.id}}/edit">edit</a>
       {{/ifCond}}
       <a class="btn btn-outline-secondary" href="javascript:history.back()">Back</a>

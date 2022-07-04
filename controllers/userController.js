@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs')
 const { User } = require('../models')
+const { getUser } = require('../helpers/auth-helpers')
 const userController = {
   signUpPage: (req, res) => {
     res.render('signup')
@@ -67,6 +68,53 @@ const userController = {
       const user = await User.findByPk(req.params.userId)
       if (!user) throw new Error('user not found')
       res.render('users/profile', { user: user.toJSON() })
+    } catch (err) {
+      next(err)
+    }
+  },
+  editUser: (req, res, next) => {
+    try {
+      const logInUser = getUser(req)
+      if (logInUser.id !== Number(req.params.userId)) throw new Error('can\'t do that shit')
+      res.render('users/edit')
+    } catch (err) {
+      next(err)
+    }
+  },
+  putUser: async (req, res, next) => {
+    try {
+      const logInUser = getUser(req)
+      const errors = []
+      const { name, introduction } = req.body
+      let { avatar } = req.body
+      if (logInUser.id !== Number(req.params.userId)) throw new Error('can\'t do that shit')
+      const user = await User.findByPk(req.params.userId)
+      if (!user) {
+        errors.push({ message: 'user not found' })
+      }
+      if (!name || !introduction) {
+        errors.push({ message: '所有欄位都是必填' })
+      }
+      if (name.length > 50) {
+        errors.push({ message: '名稱上限為50字' })
+      }
+      if (!avatar) {
+        avatar = 'https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg'
+      }
+      if (errors.length) {
+        return res.render('edit', {
+          errors,
+          name,
+          avatar,
+          introduction
+        })
+      }
+      await user.update({
+        name,
+        avatar,
+        introduction
+      })
+      res.redirect(`/users/${logInUser.id}`)
     } catch (err) {
       next(err)
     }
