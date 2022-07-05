@@ -7,10 +7,6 @@
       <ul class="list-unstyled">
         <li><strong>name:</strong> {{user.name}}</li>
         <li><strong>email:</strong> {{user.email}}</li>
-        <li><strong>Comments:</strong> 留言總數  </li>
-        <li><strong>Liked Attractions:</strong> {{ user.LikedAttractions.length }} </li>
-        <li><strong>Followings:</strong> {{ user.Followings.length }} </li>
-        <li><strong>Followers:</strong> {{ user.Followers.length }}  </li>
         <li><strong>introduction:</strong> {{user.introduction}}</li>
       </ul>
       {{#ifCond user.id logInUser.id }}
@@ -26,10 +22,18 @@
   <div class="col">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Liked Attractions</h5>
-        {{#each user.LikedAttractions }}
-          <a href="/restaurants/{{this.id}}"><p class="card-text">{{this.name}}</p></a>
+        <h5 class="card-title">{{ user.LikedAttraction.length }} Liked Attractions 喜翻的總數</h5>
+        <div class="container">
+            <div class="row row-cols-auto" style="align-items: center;">
+        {{#each user.LikedAttraction }}
+        <div class="col " style="width: 100px;">
+          <a href="/attractions/{{this.id}}"><p class="card-text">{{this.name}}</p>
+          <img class="img-responsive center-block mb-5" src="{{this.photo}}" style="max-width: 100%;" >
+          </a>
+        </div>
         {{/each}}
+        </div>
+        </div>
       </div>
     </div>
   </div>
@@ -37,34 +41,57 @@
   <div class="col">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">{{attractionCount}}Comments</h5>
+        <h5 class="card-title">{{comments.length}} Comments 留言總數</h5>
         <p class="card-text">
-          {{#each attractionListSet}}
-            <blockquote class="blockquote mb-0">
-              <span><a href="/restaurants/{{this.id}}">{{this.name}}</a></span>
-            </blockquote>
+          <div class="container">
+            <div class="row row-cols-auto" style="align-items: center;">
+          {{#each comments}}
+              <div class="col " style="width: 100px;">
+                <a href="/attractions/{{this.attractionId}}">
+                  <p>{{this.Attraction.name}}</p>
+                  <img class="img-responsive center-block mb-5" src="{{this.Attraction.photo}}" style="max-width: 100%;" >
+                </a>
+              </div>
           {{/each}}
+            </div>
+          </div>
         </p>
       </div>
     </div>
   </div>
+  {{!-- Followers --}}
     <div class="col">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Followers</h5>
-        {{#each user.Followers}}
-          <a href="/users/{{ this.id }}"><p class="card-text">{{this.name}}</p></a>
-        {{/each}}
+        <h5 class="card-title">{{ user.Followers.length }} Followers 追蹤者總數</h5>
+        <div class="container">
+          <div class="row row-cols-auto" style="align-items: center;">
+            {{#each user.Followers}}
+              <a href="/users/{{ this.id }}">
+                <p class="card-text">{{this.name}}</p>
+                <img class="img-responsive center-block mb-5" src="{{this.avatar}}" style="width: 100px; height: 100px; border-radius: 100%;" >
+              </a>
+            {{/each}}
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  {{!-- Followings --}}
   <div class="col">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Followings</h5>
-        {{#each user.Followings}}
-        <a href="/users/{{this.id}}"><p class="card-text">{{this.name}}</p></a>
-        {{/each}}
+        <h5 class="card-title"> {{ user.Followings.length }} Followings 追蹤中總數</h5>
+        <div class="container">
+          <div class="row row-cols-auto" style="align-items: center;">
+            {{#each user.Followings}}
+              <a href="/users/{{ this.id }}">
+                <p class="card-text">{{this.name}}</p>
+                <img class="img-responsive center-block mb-5" src="{{this.avatar}}" style="width: 100px; height: 100px; border-radius: 100%;" >
+              </a>
+            {{/each}}
+          </div>
+        </div>
       </div>
     </div>
   </div>

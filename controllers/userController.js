@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const { User, Attraction, Like, Followship } = require('../models')
+const { User, Attraction, Like, Followship, Comment } = require('../models')
 const userController = {
   signUpPage: (req, res) => {
     res.render('signup')
@@ -64,9 +64,26 @@ const userController = {
   },
   getUser: async (req, res, next) => {
     try {
-      const user = await User.findByPk(req.params.userId)
+      const user = await User.findByPk(req.params.userId,
+        {
+          include: [
+            { model: Attraction, as: 'LikedAttraction', attributes: ['id', 'name', 'photo'] },
+            { model: User, as: 'Followers', attributes: ['id', 'avatar'] },
+            { model: User, as: 'Followings', attributes: ['id', 'avatar'] }
+          ]
+        }
+      )
       if (!user) throw new Error('user not found')
-      res.render('users/profile', { user: user.toJSON() })
+      const comments = await Comment.findAll({
+        where: {
+          userId: req.params.userId
+        },
+        include: [{ model: Attraction, attributes: ['id', 'name', 'photo'] }],
+        group: ['Attraction.id'],
+        raw: true,
+        nest: true
+      })
+      res.render('users/profile', { user: user.toJSON(), comments })
     } catch (err) {
       next(err)
     }
@@ -91,8 +108,8 @@ const userController = {
       if (!user) {
         errors.push({ message: 'user not found' })
       }
-      if (!name || !introduction) {
-        errors.push({ message: '所有欄位都是必填' })
+      if (!name) {
+        errors.push({ message: 'name必填' })
       }
       if (name.length > 50) {
         errors.push({ message: '名稱上限為50字' })
@@ -141,7 +158,6 @@ const userController = {
   },
   deleteLike: async (req, res, next) => {
     try {
-      // if !like if !attraction
       const attraction = await Attraction.findByPk(req.params.id)
       if (!attraction) throw new Error('attraction not found')
       const like = await Like.findOne({
@@ -160,7 +176,6 @@ const userController = {
   },
   getInfluencers: async (req, res, next) => {
     try {
-      // user follower top 3
       const influencers = await User.findAll({
         attributes: ['id', 'name', 'avatar'],
         include: [
@@ -172,8 +187,6 @@ const userController = {
         followerCount: user.Followers.length,
         isFollowed: req.user.Followings.some(following => following.id === user.id)
       })).sort((a, b) => b.followerCount - a.followerCount)
-      // console.log('influencers', influencers)
-      console.log('data', data)
       res.render('influencers', { influencers: data })
     } catch (err) {
       next(err)

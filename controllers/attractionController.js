@@ -53,7 +53,6 @@ const attractionController = {
   },
   getNews: async (req, res, next) => {
     try {
-      // order newest 10 attractions & comments
       const attractions = await Attraction.findAll({
         limit: 4,
         order: [
@@ -93,7 +92,6 @@ const attractionController = {
       const attractions = top.map(top => ({
         ...top.toJSON()
       }))
-      console.log('attractions', attractions)
       res.render('top-rated', { attractions })
     } catch (err) {
       next(err)
