@@ -18,12 +18,17 @@ router.post('/signin', passport.authenticate('local', { failureRedirect: '/signi
 router.get('/logout', userController.logout)
 
 router.get('/attractions/news', authenticated, attractionController.getNews)
+router.get('/attractions/top', authenticated, attractionController.topRated)
 router.get('/attractions/:id', authenticated, attractionController.getAttraction)
 router.get('/attractions', authenticated, attractionController.getAttractions)
 
 router.post('/comments/:id', authenticated, commentController.postComment)
 router.delete('/comments/:id', authenticated, commentController.deleteComment)
 
+router.post('/following/:userId', authenticated, userController.addFollowing)
+router.delete('/following/:userId', authenticated, userController.deleteFollowing)
+
+router.get('/users/influencers', authenticated, userController.getInfluencers)
 router.get('/users/:userId', authenticated, userController.getUser)
 router.put('/users/:userId', authenticated, userController.putUser)
 router.get('/users/:userId/edit', authenticated, userController.editUser)
@@ -32,7 +37,7 @@ router.post('/like/:id', authenticated, userController.addLike)
 router.delete('/like/:id', authenticated, userController.deleteLike)
 
 // fallback 路由
-router.get('/', (req, res) => res.redirect('/attractions'))
+router.get('/', (req, res) => res.redirect('/attractions/news'))
 
 router.use('/', generalErrorHandler)
 

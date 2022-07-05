@@ -1,6 +1,6 @@
 const { Attraction, Comment, User, Like } = require('../models')
 const { getOffset, getPagination } = require('../helpers/pagination-helper')
-
+const sequelize = require('sequelize')
 const attractionController = {
   getAttractions: async (req, res) => {
     const DEFAULT_LIMIT = 9
@@ -30,11 +30,7 @@ const attractionController = {
       const attraction = await Attraction.findByPk(req.params.id,
         {
           include: [
-            {
-              model: Comment,
-              include: [
-                { model: User, attributes: ['id', 'name', 'avatar'] }]
-            }
+            { model: Comment, include: [{ model: User, attributes: ['id', 'name', 'avatar'] }] }
           ],
           order: [[Comment, 'createdAt', 'DESC']]
         })
@@ -77,6 +73,28 @@ const attractionController = {
         nest: true
       })
       res.render('news', { attractions, comments })
+    } catch (err) {
+      next(err)
+    }
+  },
+  topRated: async (req, res, next) => {
+    try {
+      const top = await Attraction.findAll({
+        include: [
+          { model: User, as: 'LikedUsers', attributes: ['id'], duplicating: false }
+        ],
+        attributes: ['id', 'name', 'photo',
+          [sequelize.fn('COUNT', sequelize.col('LikedUsers.id')), 'likeCount']
+        ],
+        group: 'id',
+        order: [[sequelize.col('likeCount'), 'DESC']],
+        limit: 6
+      })
+      const attractions = top.map(top => ({
+        ...top.toJSON()
+      }))
+      console.log('attractions', attractions)
+      res.render('top-rated', { attractions })
     } catch (err) {
       next(err)
     }

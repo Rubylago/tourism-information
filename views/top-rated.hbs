@@ -1,0 +1,17 @@
+<h1>Top-Rated</h1>
+<hr>
+<div class="row row-cols-1 row-cols-md-4 mt-1 g-4">
+  {{#each attractions}}
+  <div class="col">
+    <a class="link-primary" style="color:rgb(0, 0, 0); " href="/attractions/{{this.id}}">
+      <div class="card h-100 text-center">
+        <img src="{{this.photo}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{this.name}}</h5>
+            <i class="fa-solid fa-heart " style="color:rgb(255, 0, 0); "></i> {{likeCount}}
+        </div>
+      </div>
+    </a>
+  </div>
+  {{/each}}
+</div>

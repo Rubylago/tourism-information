@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const { User, Attraction, Like } = require('../models')
+const { User, Attraction, Like, Followship } = require('../models')
 const userController = {
   signUpPage: (req, res) => {
     res.render('signup')
@@ -153,6 +153,66 @@ const userController = {
       if (!like) throw new Error('did\'t liked before')
       await like.destroy()
       req.flash('success_messages', 'unlike successfully')
+      res.redirect('back')
+    } catch (err) {
+      next(err)
+    }
+  },
+  getInfluencers: async (req, res, next) => {
+    try {
+      // user follower top 3
+      const influencers = await User.findAll({
+        attributes: ['id', 'name', 'avatar'],
+        include: [
+          { model: User, as: 'Followers', attributes: ['id'] }
+        ]
+      })
+      const data = influencers.map(user => ({
+        ...user.toJSON(),
+        followerCount: user.Followers.length,
+        isFollowed: req.user.Followings.some(following => following.id === user.id)
+      })).sort((a, b) => b.followerCount - a.followerCount)
+      // console.log('influencers', influencers)
+      console.log('data', data)
+      res.render('influencers', { influencers: data })
+    } catch (err) {
+      next(err)
+    }
+  },
+  addFollowing: async (req, res, next) => {
+    try {
+      const user = await User.findByPk(req.params.userId)
+      if (!user) throw new Error('user not found')
+      const followShip = await Followship.findOne({
+        where: {
+          followerId: req.user.id,
+          followingId: req.params.userId
+        }
+      })
+      if (followShip) throw new Error('already followed')
+      await Followship.create({
+        followerId: req.user.id,
+        followingId: req.params.userId
+      })
+      req.flash('success_messages', 'success followed')
+      res.redirect('back')
+    } catch (err) {
+      next(err)
+    }
+  },
+  deleteFollowing: async (req, res, next) => {
+    try {
+      const user = await User.findByPk(req.params.userId)
+      if (!user) throw new Error('user not found')
+      const followShip = await Followship.findOne({
+        where: {
+          followerId: req.user.id,
+          followingId: req.params.userId
+        }
+      })
+      if (!followShip) throw new Error('haven\'t followed yet')
+      followShip.destroy()
+      req.flash('success_messages', 'success unfollowed')
       res.redirect('back')
     } catch (err) {
       next(err)
