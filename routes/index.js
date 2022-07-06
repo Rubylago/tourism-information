@@ -5,11 +5,12 @@ const admin = require('./modules/admin')
 const attractionController = require('../controllers/attractionController')
 const userController = require('../controllers/userController')
 const commentController = require('../controllers/comment-controller')
+const auth = require('./modules/auth')
 const { authenticated, authenticatedAdmin } = require('../middleware/auth')
 const { generalErrorHandler } = require('../middleware/error-handler')
 
 router.use('/admin', authenticatedAdmin, admin)
-
+router.use('/auth', auth)
 router.get('/signup', userController.signUpPage)
 router.post('/signup', userController.signUp)
 

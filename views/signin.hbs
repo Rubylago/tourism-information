@@ -1,19 +1,39 @@
-<div class="mb-4 text-center">
-  <h1 class="h3 font-weight-normal mb-3">Sign In</h1>
-</div>
-<form class="form-signin" action="/signin" method="POST">
-  <div class="form-row mb-3">
-    <label class="form-label" for="email">Email</label>
-    <input class="form-control" id="email" type="text" name="email" class="form-control" placeholder="Email" required
-      autofocus>
+
+<div class="row mt-5">
+  <div class="col-md-8 m-auto">
+    <div class="card card-body">
+      <h1 class="text-center mt-3">Sign In</h1>
+      <br>
+      <div class="row">
+        <div class="col-8 col-sm-6" style="display: flex;flex-direction: column;justify-content: space-between; border: solid 0.01em white;border-right-color: #e1dada; ">
+          <p >Sign In with your social account</p>
+          <a href="/auth/facebook" class="btn btn-block w-100">
+            <img src="https://scontent.ftpe7-4.fna.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ad8a9d&_nc_ohc=PQifPhrg4G4AX-AulYT&_nc_ht=scontent.ftpe7-4.fna&oh=00_AT-EblBSGs3XOfXf3Sm4gocoM4fgfaahJK3AU_KZ2yPTUQ&oe=62CB7B96" style="width: 100%;">
+          </a>
+          <p class="text-muted">We won't post to any of your accounts</p>
+        </div>
+        <div class="col-4 col-sm-6" style="padding-left: 30px;">
+          <div><span style="font-size: 16px;display: block;position: absolute;top: 40%;margin-left: -40px;background-color: #fff; text-align: center;color: #A3A3A3; padding-top: 15px;padding-bottom: 15px;">or</span></div>
+          <form action="/signin" method="POST">
+            <div class="mb-3">
+              <p>Sign in with your email and password</p>
+              <label for="email" class="mb-2" style="font-weight: 600">Email</label>
+              <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="mb-2" style="font-weight: 600">Password</label>
+              <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </form>
+          <p class="lead mt-4">
+            Need an account? <a href="/signup">Sign Up</a>
+          </p>
+        </div>
+      </div>
+
+      
+    </div>
   </div>
-  <div class="form-row mb-3">
-    <label class="form-label" for="password">Password</label>
-    <input class="form-control" id="password" type="password" name="password" class="form-control"
-      placeholder="Password" required>
-  </div>
-  <button class="btn btn-primary btn-block" type="submit">Submit</button>
-</form>
-<div class="mb-4 text-center">
-  <p><a href="/signup">Sign Up</a></p>
 </div>
+
