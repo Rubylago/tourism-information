@@ -21,6 +21,7 @@ router.get('/attractions/news', authenticated, attractionController.getNews)
 router.get('/attractions/top', authenticated, attractionController.topRated)
 router.get('/attractions/:id', authenticated, attractionController.getAttraction)
 router.get('/attractions', authenticated, attractionController.getAttractions)
+router.get('/search', authenticated, attractionController.getAttractions)
 
 router.post('/comments/:id', authenticated, commentController.postComment)
 router.delete('/comments/:id', authenticated, commentController.deleteComment)
