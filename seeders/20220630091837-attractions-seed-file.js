@@ -1,16 +1,18 @@
 'use strict'
-const faker = require('faker')
+// const faker = require('faker')
+const attractions = require('../openData_ODwsvAttractions.json')
+
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Attractions',
-      Array.from({ length: 50 }, () => ({
-        name: faker.name.findName(),
-        tel: faker.phone.phoneNumber(),
-        introduction: faker.lorem.text(),
-        photo: `https://loremflickr.com/320/240/nature/?lock=${Math.random() * 100}`,
-        city: faker.address.cityName(),
-        town: faker.address.county(),
-        address: faker.address.streetAddress(),
+      Array.from(attractions, (_, i) => ({
+        name: attractions[i].Name,
+        tel: attractions[i].Tel,
+        introduction: attractions[i].Introduction,
+        photo: attractions[i].Photo,
+        city: attractions[i].City,
+        town: attractions[i].Town,
+        address: attractions[i].Address,
         created_at: new Date(),
         updated_at: new Date()
       }))

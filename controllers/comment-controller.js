@@ -8,7 +8,7 @@ const commentController = {
       const attraction = await Attraction.findByPk(attractionId)
       if (!attraction) throw new Error('attraction not found')
       if (text.trim().length === 0) throw new Error('text is required')
-      if (/[~!@#$%^&*()_+<>?:"{},.\\/;'[\]]/im.test(text)) throw new Error('don\'t use special characters')
+      if (/[@#$%^&*()_+<>?:"{},.\\/;'[\]]/im.test(text)) throw new Error('don\'t use special characters')
       if (text.length > 150) throw new Error('max length 150')
       await Comment.create({
         text,

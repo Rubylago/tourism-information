@@ -1,25 +1,27 @@
 const { Attraction, Comment, User, Like } = require('../models')
 const { getOffset, getPagination } = require('../helpers/pagination-helper')
-const sequelize = require('sequelize')
 const { Op } = require('sequelize')
+const sequelize = require('sequelize')
 const attractionController = {
   getAttractions: async (req, res, next) => {
     try {
-      const DEFAULT_LIMIT = 9
+      const DEFAULT_LIMIT = 12
       const page = Number(req.query.page) || 1
       const limit = DEFAULT_LIMIT
       const offset = getOffset(limit, page)
       const LikedAttractionsId = req.user && req.user.LikedAttraction.map(liked => liked.id)
-      const keyword = req.query.keyword.trim() || ''
-      if (!keyword) throw new Error('enter something')
-      if (/[~!@#$%^&*()_+<>?:"{},.\\/;'[\]]/im.test(keyword)) throw new Error('don\'t use special characters')
+      const keyword = req.query.keyword || ''
+      if (/[@#$%^&*()_+<>:"{},.\\/;'[\]]/im.test(keyword)) throw new Error('don\'t use special characters')
+      const where = {}
+      if (keyword) where.name = { [Op.substring]: keyword || {} }
       const attractions = await Attraction.findAndCountAll({
-        where: { name: { [Op.substring]: keyword } },
+        where,
         order: [['id', 'DESC']],
         limit,
         offset,
         raw: true
       })
+      if (!attractions.count) throw new Error('no records found for the search criteria entered')
       const data = attractions.rows.map(data => ({
         ...data,
         introduction: data.introduction.substring(0, 50),
@@ -96,7 +98,7 @@ const attractionController = {
         ],
         group: 'id',
         order: [[sequelize.col('likeCount'), 'DESC']],
-        limit: 6
+        limit: 8
       })
       const attractions = top.map(top => ({
         ...top.toJSON()
