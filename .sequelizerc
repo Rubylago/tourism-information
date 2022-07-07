@@ -1,12 +1,12 @@
-    'use strict'
+'use strict'
 
-    require('dotenv').config()    // don't forget to require dotenv
-    const path = require('path')
+require('dotenv').config()    // don't forget to require dotenv
+const path = require('path')
 
-    module.exports = {
-    // 原本是 config.json，修改成 config.js
-    'config': path.resolve('config', 'config.js'), 
-      'models-path': path.resolve('models'),
-      'seeders-path': path.resolve('seeders'),
-      'migrations-path': path.resolve('migrations'),
-    }
+module.exports = {
+// 原本是 config.json，修改成 config.js
+  'config': path.resolve('config', 'config.js'), 
+  'models-path': path.resolve('models'),
+  'seeders-path': path.resolve('seeders'),
+  'migrations-path': path.resolve('migrations'),
+}
