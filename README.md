@@ -38,17 +38,25 @@ As a visitor, you can...
 
 <div style="margin-left: 40px; text-align: center;">
 
-|  email   | password  |
-|  ----  | ----  |
-| user1@example.com  | 12345678 |
-
+|role|  email   | password  |
+|---- |  ----  | ----  |
+|user|user1@example.com|12345678|
 </div>
 
 ### Admin
+
 As a admin, you can ...
 
 1. Create, edit, delete attractions at attractions management page.
 2. You can also delete comments bellow the attraction page as well.
+3. Below is a admin account you can use
+
+<div style="margin-left: 40px; text-align: center;">
+
+|role|  email   | password  |
+|---- |  ----  | ----  |
+|admin|admin@example.com|admin|
+</div>
 
 ## Run the server locally
 
@@ -107,6 +115,6 @@ npm run start
 
 #### **8. Find the message for successful activation**
 
-```
+```bash
 > app running http://localhost:3000
 ```
