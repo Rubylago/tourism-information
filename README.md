@@ -1,7 +1,7 @@
 # Tourism Review
 Tourism Review is a backend project built with Node.js + Express + MySQL/ClearDB, deployed on Heroku.
 <p align="center">
-  <a href="https://imgur.com/D2UVYQv"><img src="https://i.imgur.com/D2UVYQv.jpg?1" title="source: imgur.com" />Start your journey</a>
+  <a href="https://desolate-falls-97924.herokuapp.com/"><img src="https://i.imgur.com/D2UVYQv.jpg?1" title="source: imgur.com" />Start your journey</a>
 </p>
 
 
