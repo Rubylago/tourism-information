@@ -74,7 +74,7 @@ The following instruction will walk you through the installation and settings ne
 #### **1. Clone this repository to your local machine**
 
 ```bash
-git clone https://github.com/r05323045/mealfinder.git
+git clone https://github.com/Rubylago/tourism-information.git
 ```
 
 #### **2. Setup Database**
