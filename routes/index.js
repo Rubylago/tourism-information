@@ -6,6 +6,7 @@ const attractionController = require('../controllers/attractionController')
 const userController = require('../controllers/userController')
 const commentController = require('../controllers/comment-controller')
 const auth = require('./modules/auth')
+const upload = require('../middleware/multer')
 const { authenticated, authenticatedAdmin } = require('../middleware/auth')
 const { generalErrorHandler } = require('../middleware/error-handler')
 
@@ -32,7 +33,7 @@ router.delete('/following/:userId', authenticated, userController.deleteFollowin
 
 router.get('/users/influencers', authenticated, userController.getInfluencers)
 router.get('/users/:userId', authenticated, userController.getUser)
-router.put('/users/:userId', authenticated, userController.putUser)
+router.put('/users/:userId', authenticated, upload.single('avatar'), userController.putUser)
 router.get('/users/:userId/edit', authenticated, userController.editUser)
 
 router.post('/like/:id', authenticated, userController.addLike)

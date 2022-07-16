@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs')
 const { User, Attraction, Like, Followship, Comment } = require('../models')
+const { imgurFileHandler } = require('../helpers/file-helpers')
 const userController = {
   signUpPage: (req, res) => {
     res.render('signup')
@@ -125,9 +126,12 @@ const userController = {
           introduction
         })
       }
+
+      const { file } = req
+      const filesPath = await imgurFileHandler(file)
       await user.update({
         name,
-        avatar,
+        avatar: filesPath || avatar,
         introduction
       })
       res.redirect(`/users/${logInUserId}`)

@@ -1,9 +1,10 @@
 # Tourism Review
-Tourism Review is a backend project built with Node.js + Express + MySQL/ClearDB, deployed on Heroku.
-<p align="center">
-  <a href="https://imgur.com/D2UVYQv"><img src="https://i.imgur.com/D2UVYQv.jpg?1" title="source: imgur.com" />Start your journey</a>
-</p>
 
+Tourism Review is a backend project built with Node.js + Express + MySQL/ClearDB, deployed on Heroku.
+
+<p align="center">
+  <a href="https://desolate-falls-97924.herokuapp.com/"><img src="https://i.imgur.com/D2UVYQv.jpg?1" title="source: imgur.com" />Start your journey</a>
+</p>
 
 ## Table of contents
 
@@ -74,14 +75,14 @@ The following instruction will walk you through the installation and settings ne
 #### **1. Clone this repository to your local machine**
 
 ```bash
-git clone https://github.com/r05323045/mealfinder.git
+git clone https://github.com/Rubylago/tourism-information.git
 ```
 
 #### **2. Setup Database**
 
 > Create database via MySQL Workbench
 
-```bash
+```
 drop database if exists tourism;
 create database tourism;
 ```

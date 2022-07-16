@@ -1,7 +1,7 @@
 <div class="mb-4 text-center">
   <h1 class="h3 font-weight-normal mb-3">Edit</h1>
 </div>
-<form action="/users/{{user.id}}?_method=PUT" method="POST" style="width: 100%;">
+<form action="/users/{{user.id}}?_method=PUT" method="POST" style="width: 100%;" enctype="multipart/form-data">
   <div class="form-row mb-3">
     <label class="form-label" for="name">Name</label>
     <input
@@ -16,15 +16,15 @@
     />
   </div>
     <div class="form-row mb-3">
-    <label class="form-label" for="avatar">avatar</label>
+    <label class="form-label" for="avatar"><span>avatar</span></label>
     <input 
-    class="form-control" 
-    type="url" 
+    type="file" 
+    accept="image/*"
     name="avatar" 
-    id="avatar" 
-    placeholder="Enter avatar URL" 
-    value="{{user.avatar}}">
+    />
+    <span class="text-muted">上傳檔案大小需小於1MB</span>
   </div>
+    
   <div class="form-row mb-3">
     <label class="form-label" for="introduction">introduction</label>
     <textarea 
