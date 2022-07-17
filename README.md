@@ -9,7 +9,9 @@ Tourism Review 是一個使用 Node.js + Express + MySQL/ClearDB 建立的後端
 
 ## Table of contents
 - [專案說明](#專案說明)
-- [ERD](#ERD)
+- [Demo](#Demo)
+- [測試帳號](#測試帳號)
+- [使用技術](#使用技術)
 - [About](#About)
 - [Features](#Features)
 - [Run the server locally](#Run-the-server-locally)
@@ -39,32 +41,14 @@ Tourism Review 是一個使用 Node.js + Express + MySQL/ClearDB 建立的後端
 
 ## 使用技術
 
-- Node.js, Express
-- 使用index加速MySQL查詢效率
-- 
-- 網站部署於 Heroku 
-- 申請SSL憑證實踐HTTPS
-- Bootstrapt
+- Node.js, Express, MySQL
+- 支援 Facebook Login
+- 網站使用 Github 自動化部署於 Heroku
+- 整合 imgur API，實作上傳圖片功能
+- 採用 bcrypt 處理使用者密碼
+- 結合 Bootstrap & Handlebars 完成前端版面設置
 
-## 套件
-    bcryptjs: 2.4.3,
-    connect-flash: 0.1.1,
-    dayjs: 1.10.6,
-    dotenv: 8.2.0,
-    express: 4.17.1,
-    express-handlebars: 5.3.3,
-    express-session: 1.17.2,
-    faker: "^5.5.3",
-    imgur: "^2.2.0",
-    method-override: "^3.0.0",
-    multer: "^1.4.3",
-    mysql2: "^2.2.5",
-    passport: "^0.4.1",
-    passport-facebook: "^3.0.0",
-    passport-local: "^1.0.0",
-    sequeliz": "^6.3.5",
-    sequelize-cli": "^6.2.0",
-    tslib": "^2.4.0"
+## 功能介紹
 
 ## About
 
