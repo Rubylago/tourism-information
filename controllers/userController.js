@@ -103,7 +103,7 @@ const userController = {
       const logInUserId = req.user.id
       const errors = []
       const { name, introduction } = req.body
-      let { avatar } = req.body
+      const { avatar } = req.body
       if (logInUserId !== Number(req.params.userId)) throw new Error('can\'t do that shit')
       const user = await User.findByPk(req.params.userId)
       if (!user) {
@@ -114,9 +114,6 @@ const userController = {
       }
       if (name.length > 50) {
         errors.push({ message: '名稱上限為50字' })
-      }
-      if (!avatar) {
-        avatar = 'https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg'
       }
       if (errors.length) {
         return res.render('edit', {

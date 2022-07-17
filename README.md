@@ -1,6 +1,7 @@
 # Tourism Review
 
 Tourism Review is a backend project built with Node.js + Express + MySQL/ClearDB, deployed on Heroku.
+Tourism Review 是一個使用 Node.js + Express + MySQL/ClearDB 建立的後端專案，使用 Github 自動化部署於 Heroku。
 
 <p align="center">
   <a href="https://desolate-falls-97924.herokuapp.com/"><img src="https://i.imgur.com/D2UVYQv.jpg?1" title="source: imgur.com" />Start your journey</a>
@@ -15,26 +16,19 @@ Tourism Review is a backend project built with Node.js + Express + MySQL/ClearDB
 
 ## 專案說明
 
-本網站以 [全國休閒農業區旅遊資訊](https://data.gov.tw/dataset/6406)作為資料根據，建置台灣在地休閒農場討論網站，內容包含：
+本網站以 [全國休閒農業區旅遊資訊](https://data.gov.tw/dataset/6406) 作為資料根據，建置台灣在地休閒農場討論網站，內容包含：
 
   1. 首頁: 最新消息、最新上架景點、最新留言綜覽
   2. 所有景點與單一景點資訊
   3. 帳號系統：個人帳號之建置與個人資料修改、Facebook 第三方認證登入
-  4. 留言系統
-  5. 收藏系統
-  6. 追蹤系統
-  7. 後台管理系統
-
-## ERD
-
- TODO:
-
+  4. 留言系統：使用者可以於單一景點下方留言
+  5. 收藏系統：使用者可以按愛心收藏喜歡的景點
+  6. 追蹤系統：使用者可以追蹤其他使用者
+  7. 後台管理系統：管理員 CRUD
 
 ## Demo
 
 **[Live Demo](https://desolate-falls-97924.herokuapp.com/)**  
-
-TODO:  小孔農專案介紹
 
 ### 測試帳號
 
