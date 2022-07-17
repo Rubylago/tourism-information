@@ -4,7 +4,36 @@
       <a class="navbar-brand" href="/attractions/news">
         <i class="fa-solid fa-location-dot"> Tourism Review </i>
       </a>
-      {{#if user}}
+      
+      {{#if logInUser.isAdmin}}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/attractions">Attractions Management</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/users">Users Management</a>
+            </li>
+            {{!-- <li class="nav-item">
+              <a class="nav-link" href="/users/Comments">Comments</a>
+            </li> --}}
+            <li class="nav-item d-inline-flex align-items-center">
+              <a href="/users/{{logInUser.id}}">
+              <img src="{{logInUser.avatar}}" alt="" width="20" height="20" class="d-inline-block align-text-top">
+              <span class="navbar-text">{{logInUser.email}}</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/logout"><button class="btn btn-outline-success my-sm-0 my-2" style="margin:10px;">Logout</button></a>
+            </li>
+          </ul>
+        </div>
+        {{else}}
+        {{#if user}}
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -23,14 +52,9 @@
             <li class="nav-item">
               <a class="nav-link" href="/attractions/top">Top-Rated</a>
             </li>
-            {{#if user.isAdmin}}
-              <li class="nav-item">
-                <a href="/admin" class="nav-link">Admin</a>
-              </li>
-            {{/if}}
             <li class="nav-item d-inline-flex align-items-center">
-              <a href="/users/{{user.id}}">
-              <img src="{{user.avatar}}" alt="" width="20" height="20" class="d-inline-block align-text-top">
+              <a href="/users/{{logInUser.id}}">
+              <img src="{{logInUser.avatar}}" alt="" width="20" height="20" class="d-inline-block align-text-top">
               <span class="navbar-text">{{logInUser.email}}</span>
               </a>
             </li>
@@ -39,6 +63,7 @@
             </li>
           </ul>
         </div>
+      {{/if}}
       {{/if}}
     </div>
   </nav>

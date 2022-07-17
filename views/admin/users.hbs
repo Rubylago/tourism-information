@@ -1,0 +1,12 @@
+<h1>Users Management</h1>
+<hr>
+<div class="row" style="text-align: center;">
+  {{#each users}}
+    <div class="col-3">
+      <a href="/users/{{this.id}}">
+        <img src="{{this.avatar}}" width="140px" height="140px" style="border-radius: 100%;" />
+      </a>
+      <h2>{{this.name}}</h2>
+    </div>
+  {{/each}}
+</div>

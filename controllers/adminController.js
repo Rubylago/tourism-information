@@ -1,6 +1,13 @@
-const { Attraction, City } = require('../models')
+const { Attraction, City, User } = require('../models')
 
 const adminController = {
+  signInPage: (req, res) => {
+    res.render('admin/signin')
+  },
+  signIn: (req, res) => {
+    req.flash('success_messages', '成功登入')
+    res.redirect('/admin/attractions')
+  },
   getAttractions: async (req, res, next) => {
     try {
       const attractions = await Attraction.findAll({
@@ -97,6 +104,19 @@ const adminController = {
         }
       })
       return res.redirect('/admin/attractions')
+    } catch (err) {
+      next(err)
+    }
+  },
+  getUsers: async (req, res, next) => {
+    try {
+      const users = await User.findAll({
+        attributes: { exclude: ['password'] },
+        raw: true,
+        nest: true
+      })
+      console.log('users:', users)
+      return res.render('admin/users', { users })
     } catch (err) {
       next(err)
     }

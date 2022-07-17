@@ -10,6 +10,8 @@ router.get('/attractions/:id', adminController.getAttraction)
 router.get('/attractions', adminController.getAttractions)
 router.post('/attractions', adminController.postAttraction)
 
+router.get('/users', adminController.getUsers)
+
 // fallback 路由
 router.get('', (req, res) => res.redirect('/admin/attractions'))
 

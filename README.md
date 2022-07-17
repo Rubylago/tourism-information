@@ -7,16 +7,74 @@ Tourism Review is a backend project built with Node.js + Express + MySQL/ClearDB
 </p>
 
 ## Table of contents
-
+- [專案說明](#專案說明)
+- [ERD](#ERD)
 - [About](#About)
 - [Features](#Features)
 - [Run the server locally](#Run-the-server-locally)
 
+## 專案說明
+
+本網站以 [全國休閒農業區旅遊資訊](https://data.gov.tw/dataset/6406)作為資料根據，建置台灣在地休閒農場討論網站，內容包含：
+
+  1. 首頁: 最新消息、最新上架景點、最新留言綜覽
+  2. 所有景點與單一景點資訊
+  3. 帳號系統：個人帳號之建置與個人資料修改、Facebook 第三方認證登入
+  4. 留言系統
+  5. 收藏系統
+  6. 追蹤系統
+  7. 後台管理系統
+
+## ERD
+
+ TODO:
+
+
+## Demo
+
+**[Live Demo](https://desolate-falls-97924.herokuapp.com/)**  
+
+TODO:  小孔農專案介紹
+
+### 測試帳號
+
+|role|  email   | password  |
+|---- |  ----  | ----  |
+|user|user1@example.com|12345678|
+|admin|admin@example.com|admin|
+
+## 使用技術
+
+- Node.js, Express
+- 使用index加速MySQL查詢效率
+- 
+- 網站部署於 Heroku 
+- 申請SSL憑證實踐HTTPS
+- Bootstrapt
+
+## 套件
+    bcryptjs: 2.4.3,
+    connect-flash: 0.1.1,
+    dayjs: 1.10.6,
+    dotenv: 8.2.0,
+    express: 4.17.1,
+    express-handlebars: 5.3.3,
+    express-session: 1.17.2,
+    faker: "^5.5.3",
+    imgur: "^2.2.0",
+    method-override: "^3.0.0",
+    multer: "^1.4.3",
+    mysql2: "^2.2.5",
+    passport: "^0.4.1",
+    passport-facebook: "^3.0.0",
+    passport-local: "^1.0.0",
+    sequeliz": "^6.3.5",
+    sequelize-cli": "^6.2.0",
+    tslib": "^2.4.0"
+
 ## About
 
 Tourism Review is an online tourism information of national leisure agricultural areas platform that can help you explore attractions. You can leave a comment or bookmark your favorite attractions, follow top travel influencers and design your perfect vacation by choosing from the best attractions.
-
-### Third-party libraries that are used in this project
 
 - Using [bcrypt](https://www.npmjs.com/package/bcrypt) to hash password with a salt
 - Using [body-parser](https://www.npmjs.com/package/body-parser) to extract the information from incoming requests such as sign-up form at frontend
