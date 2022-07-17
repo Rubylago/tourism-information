@@ -5,7 +5,7 @@ Tourism Review 是一個使用 Node.js + Express + MySQL/ClearDB 建立的後端
 
 <p align="center">
   <a href="https://desolate-falls-97924.herokuapp.com/"> 
-  ![index](https://github.com/Rubylago/tourism-information/raw/main/tourism-information_index.jpg)
+  ![index](https://github.com/Rubylago/tourism-information/blob/main/tourism-information_index.jpg?raw=true)
   Start your journey</a>
 </p>
 
