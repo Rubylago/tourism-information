@@ -1,6 +1,5 @@
 # Tourism Review
 
-Tourism Review is a backend project built with Node.js + Express + MySQL/ClearDB, deployed on Heroku.
 Tourism Review 是一個使用 Node.js + Express + MySQL/ClearDB 建立的後端專案，使用 Github 自動化部署於 Heroku。
 
   ![index](https://github.com/Rubylago/tourism-information/blob/main/tourism-information_index.jpg?raw=true)  
@@ -53,14 +52,9 @@ Tourism Review 是一個使用 Node.js + Express + MySQL/ClearDB 建立的後端
 
 ## About
 
-Tourism Review is an online tourism information of national leisure agricultural areas platform that can help you explore attractions. You can leave a comment or bookmark your favorite attractions, follow top travel influencers and design your perfect vacation by choosing from the best attractions.
+Tourism Review is a backend project built with Node.js + Express + MySQL/ClearDB, deployed on Heroku.  
 
-- Using [bcrypt](https://www.npmjs.com/package/bcrypt) to hash password with a salt
-- Using [body-parser](https://www.npmjs.com/package/body-parser) to extract the information from incoming requests such as sign-up form at frontend
-- Using [express](https://expressjs.com) as web applications framework for Node.js
-- Using [method-override](https://www.npmjs.com/package/method-override) to support DELETE and PUT requests
-- Using [dayjs](https://www.npmjs.com/package/dayjs) to customize date and time format in confirmation email
-- Using [passport-facebook](http://www.passportjs.org/packages/passport-facebook/) with Facebook Strategy to authenticate users with their Facebook account, and give access to user's profile info for signing up
+It's an online tourism information of national leisure agricultural areas platform that can help you explore attractions. You can leave a comment or bookmark your favorite attractions, follow top travel influencers and design your perfect vacation by choosing from the best attractions.
 
 ## Features
 
