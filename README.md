@@ -4,7 +4,9 @@ Tourism Review is a backend project built with Node.js + Express + MySQL/ClearDB
 Tourism Review 是一個使用 Node.js + Express + MySQL/ClearDB 建立的後端專案，使用 Github 自動化部署於 Heroku。
 
 <p align="center">
-  <a href="https://desolate-falls-97924.herokuapp.com/"><img src="https://i.imgur.com/D2UVYQv.jpg?1" title="source: imgur.com" />Start your journey</a>
+  <a href="https://desolate-falls-97924.herokuapp.com/"> 
+  ![index](https://github.com/Rubylago/tourism-information/blob/main/tourism-information_index.jpg)
+  Start your journey</a>
 </p>
 
 ## Table of contents
@@ -47,8 +49,6 @@ Tourism Review 是一個使用 Node.js + Express + MySQL/ClearDB 建立的後端
 - 整合 imgur API，實作上傳圖片功能
 - 採用 bcrypt 處理使用者密碼
 - 結合 Bootstrap & Handlebars 完成前端版面設置
-
-## 功能介紹
 
 ## About
 
