@@ -29,7 +29,8 @@ const attractionController = {
       }))
       return res.render('attractions', {
         attractions: data,
-        pagination: getPagination(limit, page, attractions.count)
+        pagination: getPagination(limit, page, attractions.count),
+        keyword
       })
     } catch (err) {
       next(err)
